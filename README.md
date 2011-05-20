@@ -8,6 +8,10 @@ command line.
 
 # Setup
 
+Please note that, as of now, Spade depends on your rubygem to be version 1.7.2.
+You can install rubygems 1.7.2 with the following command:
+    gem update --system 1.7.2
+
 The following commands will get you started on spade with an initial set of
 packages:
 
