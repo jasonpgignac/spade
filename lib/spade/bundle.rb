@@ -16,7 +16,6 @@ module Spade
         spade_path = File.join(rootdir, SPADE_DIR)
         FileUtils.rm_r(spade_path) if File.exists? spade_path
 
-        FileUtils.mkdir_p spade_path
         FileUtils.mkdir_p File.join(spade_path, 'packages')
 
         FileUtils.ln_s BOOT_PATH, File.join(spade_path, 'boot')
