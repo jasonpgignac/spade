@@ -14,9 +14,10 @@ module Spade
 
         verbose = opts[:verbose]
         spade_path = File.join(rootdir, SPADE_DIR)
+        spade_package_path = File.join(spade_path, 'packages')
         FileUtils.rm_r(spade_path) if File.exists? spade_path
 
-        FileUtils.mkdir_p File.join(spade_path, 'packages')
+        FileUtils.mkdir_p File.join(spade_package_path)
 
         FileUtils.ln_s BOOT_PATH, File.join(spade_path, 'boot')
 
@@ -47,7 +48,7 @@ module Spade
             # Use relative paths if embedded
             old_path = if local
               # Figure out how many levels deep the spade_path is in the project
-              levels = spade_path.sub(rootdir, '').split(File::SEPARATOR).reject{|p| p.empty? }.count + 1
+              levels = spade_package_path.sub(rootdir, '').split(File::SEPARATOR).reject{|p| p.empty? }.count
               # Build relative path
               File.join(['..'] * levels, path.sub(rootdir, ''))
             else
