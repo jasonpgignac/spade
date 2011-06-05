@@ -1,19 +1,4 @@
 PATH
-  remote: .
-  specs:
-    spade-runtime (0.1.0)
-      childlabor (~> 0.0.3)
-      eventmachine (~> 0.12.10)
-      highline (~> 1.6.1)
-      json_pure (~> 1.4.6)
-      rack (~> 1.2.1)
-      spade-core
-      spade-packager
-      spade-ruby
-      therubyracer (~> 0.8.0)
-      thor (~> 0.14.3)
-
-PATH
   remote: ../spade-core
   specs:
     spade-core (0.1.0)
@@ -35,6 +20,21 @@ PATH
   specs:
     spade-ruby (0.1.0)
 
+PATH
+  remote: .
+  specs:
+    spade-runtime (0.1.0)
+      childlabor (~> 0.0.3)
+      eventmachine (~> 0.12.10)
+      highline (~> 1.6.1)
+      json_pure (~> 1.4.6)
+      rack (~> 1.2.1)
+      spade-core
+      spade-packager
+      spade-ruby
+      therubyracer (~> 0.8.0)
+      thor (~> 0.14.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -50,7 +50,7 @@ GEM
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
       rspec-mocks (~> 2.6.0)
-    rspec-core (2.6.3)
+    rspec-core (2.6.4)
     rspec-expectations (2.6.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.6.0)

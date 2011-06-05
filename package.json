@@ -2,8 +2,10 @@
   "name": "spade",
   "version": "0.0.7",
   "description": "CommonJS Microkernel for Browser and Command Line",
-
-  "maintainers": [
+  "summary": "Package Management tool for use with Javascripts",
+  "homepage": "http://github.com/strobecorp/spade",
+	"author": "Peter Wagenet",
+	"maintainers": [
     {
       "name": "Charles Jolley",
       "email": "charles@sproutcore.com",

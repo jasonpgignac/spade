@@ -9,7 +9,7 @@ describe "spade uninstall" do
     env["GEM_PATH"] = spade_dir.to_s
     start_fake(FakeGemServer.new)
   end
-
+  
   it "uninstalls a gem" do
     spade "package", "install", "rake"
     wait
