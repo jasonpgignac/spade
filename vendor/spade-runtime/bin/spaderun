@@ -2,6 +2,8 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $:.unshift(lib) if File.exists?(lib)
 
-require 'spade/cli'
+require 'spade/runtime'
 
-Spade::CLI::Base.start
+Spade::Runtime::CLI::Base.start
+
+

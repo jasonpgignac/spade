@@ -13,28 +13,22 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/strobecorp/spade"
   s.summary = s.description = "Unified JavaScript runner for browser and command line"
 
-  mswin = RbConfig::CONFIG["host_os"] =~ %r!(msdos|mswin|djgpp|mingw)!
-  mri = !mswin && (!defined?(RUBY_ENGINE) || RUBY_ENGINE == "ruby")
+  s.add_dependency 'spade-packager'
+  s.add_dependency 'spade-runtime'
 
-  s.add_dependency "libgems"
-  s.add_dependency "gemcutter",    "~> 0.6.1"
-  s.add_dependency "eventmachine", "~> 0.12.10"
-  s.add_dependency "highline",     "~> 1.6.1"
-  s.add_dependency "json_pure",    "~> 1.4.6"
-  s.add_dependency "rack",         "~> 1.2.1"
-  s.add_dependency "thor",         "~> 0.14.3"
-  s.add_dependency "childlabor",   "~> 0.0.3"
-  s.add_dependency "therubyracer", "~> 0.8.0" if mri
+  s.add_development_dependency 'rspec'
 
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "system_timer" if mri && RUBY_VERSION < "1.9"
-
+=begin
   paths = `git submodule`.split("\n").map do |line|
     path = line.gsub(/^ \w+ ([^\s]+) .+$/,'\1')
     `cd #{path}; git ls-files`.split("\n").map { |p| File.join(path, p) }
   end
   paths << `git ls-files`.split("\n")
   s.files      = paths.flatten
+=end
+  paths = Dir.glob("{bin,examples,lib,spec,vendor}/**/*")
+  paths += %w(Buildfile Gemfile package.json Rakefile README.md)
+  s.files = paths
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
 
   s.executables        = ['spade']
