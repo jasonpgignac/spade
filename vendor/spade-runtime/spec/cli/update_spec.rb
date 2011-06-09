@@ -3,11 +3,8 @@ require "spec_helper"
 describe "spade update" do
   before do
     # prep the application
-    cd(home)
-    env["HOME"] = home.to_s
-    env["RUBYGEMS_HOST"] = "http://localhost:9292"
-    start_fake(FakeGemServer.new)
-    puts Spade::Environment.new.spade_dir
+    goto_home
+    puts LibGems.dir
     
     FileUtils.mkdir_p (@app_path = tmp.join("update_test"))
     FileUtils.mkdir_p (@app_packages_path = @app_path.join("packages"))
@@ -17,7 +14,7 @@ describe "spade update" do
       f2.puts '{"name":"update_test","dependencies":{"fake_package": null}}'
     end
     cd(@app_path)
-    puts Spade::Environment.new.spade_dir
+    puts LibGems.dir
     
   end
   after do
@@ -31,7 +28,8 @@ describe "spade update" do
     File.open(package_file_path, 'w') do |f|
       f.puts '{"name": "fake_package"}'
     end
-    Spade::CLI::Base.start(["update", "--working=#{@app_path.to_s}"])
+    spade("runtime","update", "--working=#{@app_path.to_s}")
+    wait()
     "fake_package".should be_linked_to("../../packages/fake_package")
   end
   it "should use required packages if they are in the application's vendor/packages folder" do
@@ -40,10 +38,23 @@ describe "spade update" do
     File.open(package_file_path, 'w') do |f|
       f.puts '{"name": "fake_package"}'
     end
-    Spade::CLI::Base.start(["update", "--working=#{@app_path.to_s}"])
+    spade("runtime","update", "--working=#{@app_path.to_s}")
+    wait()
     "fake_package".should be_linked_to("../../vendor/packages/fake_package")
   end
-  it "should use required packages if they are in the home folder"
+  it "should use required packages if they are in the home folder" do
+    FileUtils.mkdir_p (package_path = spade_dir.join("gems","fake_package"))
+    package_file_path = package_path.join("package.json")
+    File.open(package_file_path, 'w') do |f|
+      f.puts '{"name": "fake_package"}'
+    end
+    puts "Well, what happens when I run this stupid update"
+    unthreaded_spade("runtime","update", "--working=#{@app_path.to_s}")
+    wait()
+    puts "Well, that's what!"
+    puts LibGems.dir
+    "fake_package".should be_linked_to(package_path)
+  end
   it "should install from the network repository if it does not exist elsewhere"
   it "should raise an error if the package is in none of the locations"
   it "should not link to a package if it is the incorrect version"

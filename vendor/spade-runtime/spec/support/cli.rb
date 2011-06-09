@@ -13,6 +13,11 @@ module SpecHelpers
     @env ||= {}
   end
 
+  def unthreaded_spade(*argv)
+    opts = Hash === argv.last ? argv.pop : {}
+    CLI.start(argv)
+  end
+  
   def spade(*argv)
     opts = Hash === argv.last ? argv.pop : {}
 

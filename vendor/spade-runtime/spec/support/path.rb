@@ -49,6 +49,13 @@ module SpecHelpers
   def spade_dir(*path)
     home(Spade::Packager::SPADE_DIR, *path)
   end
+  
+  def goto_home
+    cd(home)
+    ENV["HOME"] = home.to_s
+    LibGems.clear_paths
+    puts "Now, here's how the next path should be set: #{ENV['SPADE_HOME']} : #{LibGems.configuration.home} : #{ENV["HOME"]} : #{Spade::Packager::SPADE_DIR}"
+  end
 
   module_function :root, :tmp, :home, :local
 end

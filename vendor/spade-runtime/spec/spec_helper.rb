@@ -3,6 +3,7 @@ Bundler.require :default, :development
 require 'support/cli'
 require 'support/core_test'
 require 'support/path'
+require 'support/matchers'
 
 RSpec.configure do |config|
   working_dir = Dir.pwd
