@@ -4,7 +4,6 @@ describe "spade update" do
   before do
     # prep the application
     goto_home
-    puts LibGems.dir
     
     FileUtils.mkdir_p (@app_path = tmp.join("update_test"))
     FileUtils.mkdir_p (@app_packages_path = @app_path.join("packages"))
@@ -14,7 +13,6 @@ describe "spade update" do
       f2.puts '{"name":"update_test","dependencies":{"fake_package": null}}'
     end
     cd(@app_path)
-    puts LibGems.dir
     
   end
   after do
@@ -48,11 +46,7 @@ describe "spade update" do
     File.open(package_file_path, 'w') do |f|
       f.puts '{"name": "fake_package"}'
     end
-    puts "Well, what happens when I run this stupid update"
     unthreaded_spade("runtime","update", "--working=#{@app_path.to_s}")
-    wait()
-    puts "Well, that's what!"
-    puts LibGems.dir
     "fake_package".should be_linked_to(package_path)
   end
   it "should install from the network repository if it does not exist elsewhere"
