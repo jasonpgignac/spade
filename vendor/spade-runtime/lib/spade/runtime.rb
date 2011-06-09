@@ -4,7 +4,6 @@ require 'spade/ruby' # Should we always require this?
 
 module Spade
   module Runtime
-    SPADE_DIR = '.spade' # Would be nice to share this with node.js loader
     JSPATH = File.expand_path("../runtime/js/spade.js", __FILE__)
 
     autoload :Bundle,     'spade/runtime/bundle'

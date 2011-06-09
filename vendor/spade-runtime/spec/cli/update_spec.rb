@@ -40,7 +40,7 @@ describe "spade update" do
     wait()
     "fake_package".should be_linked_to("../../vendor/packages/fake_package")
   end
-  it "should use required packages if they are in the home folder" do
+  it "should use required packages if they are in the home spade directory" do
     FileUtils.mkdir_p (package_path = spade_dir.join("gems","fake_package"))
     package_file_path = package_path.join("package.json")
     File.open(package_file_path, 'w') do |f|
@@ -49,11 +49,14 @@ describe "spade update" do
     unthreaded_spade("runtime","update", "--working=#{@app_path.to_s}")
     "fake_package".should be_linked_to(package_path)
   end
+  it "shoudl not try to choose from the home spade directory if Packager is not installed"
   it "should install from the network repository if it does not exist elsewhere"
   it "should raise an error if the package is in none of the locations"
   it "should not link to a package if it is the incorrect version"
+  it "shoudl not try to install the package if Packager is not installed"
   it "should install the correct version"
   it "should raise an error if the package is only available in the wrong version"
+  it "should select packages in the correct order if there are multiple equal editions"
   it "should create a spade-boot.js"
   it "should record the versions in spade-boot.js"
 end
