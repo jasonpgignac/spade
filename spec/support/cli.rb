@@ -13,6 +13,7 @@ module SpecHelpers
 
     @pid = Process.fork do
       Dir.chdir opts[:chdir] if opts[:chdir]
+      puts "Directory: " + Dir.pwd
 
       @stdout.close
       STDOUT.reopen @stdout_child

@@ -1,3 +1,15 @@
+RSpec::Matchers.define :be_linked_to do |package_path|
+  match do |package_name|
+    package_link_path = tmp.join("update_test",".spade","packages",package_name) 
+    File.symlink?(package_link_path) == true &&
+    File.readlink(package_link_path) == package_path
+  end
+  failure_message_for_should do |package_name|
+    package_link_path = tmp.join("update_test",".spade","packages",package_name)
+    "expected that #{package_name} would be linked to #{package_path}, but is linked to #{File.readlink(package_link_path)}"
+  end
+end
+
 RSpec::Matchers.define :be_fetched do
   include SpecHelpers
   match do |name|
